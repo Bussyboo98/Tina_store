@@ -1,0 +1,58 @@
+{% extends 'client/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+{% block title%}
+ Payment Caneled
+{% endblock %}
+
+{% block content %}
+    <body>
+                
+        <!--PreLoader-->
+        <div class="loader">
+            <div class="loader-inner">
+                <div class="circle"></div>
+            </div>
+        </div>
+        <!--PreLoader Ends-->
+        
+        
+        <!-- breadcrumb-section -->
+        <div class="breadcrumb-section breadcrumb-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2 text-center">
+                        <div class="breadcrumb-text">
+                            <p>Payment Canceled</p>
+                            <h1> Something went wrong</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end breadcrumb section -->
+
+       
+        <div class="container mt-15 justify-content-center mt-30 ">
+            <h4 class="text-center justify-content-center mt-100 mb-[-100] ">
+            <br>
+            </h4>
+            
+            <p class="text-center justify-content-center mt-15">
+          
+                <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                <lord-icon
+                    src="https://cdn.lordicon.com/tdrtiskw.json"
+                    trigger="hover"
+                    colors="primary:#242424,secondary:#08a385"
+                    state="hover-1"
+                    style="width:310px;height:310px">
+                </lord-icon>
+    
+            </p>
+        </div>
+        
+    </body>
+{% endblock %}

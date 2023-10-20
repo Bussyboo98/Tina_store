@@ -1,0 +1,119 @@
+{% extends 'client/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+{% block title%}
+    Payment Initiation
+{% endblock %}
+
+{% block content %}
+    <body>
+            
+        <!--PreLoader-->
+        <div class="loader">
+            <div class="loader-inner">
+                <div class="circle"></div>
+            </div>
+        </div>
+        <!--PreLoader Ends-->
+        
+        
+        <!-- breadcrumb-section -->
+        <div class="breadcrumb-section breadcrumb-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2 text-center">
+                        <div class="breadcrumb-text">
+                            <p>Make Payment</p>
+                            <h1>Payment Initiation</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end breadcrumb section -->
+
+        <div class="contact-from-section mt-150 mb-150">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8 mb-5 mb-lg-0">
+						<div class="form-title">
+							<h2>Proceed to make Payment?</h2>
+							<p>Fill the form below correctly</p>
+						</div>
+				</div>
+			</div>
+		</div>
+
+        <section class="contact-area section-padding-0-100 mt-15 mb-15 ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="contact-form-area ">
+                            <div id="form_status"></div>
+                            <div class="contact-form">
+                                <form method="post" >
+                                    {% csrf_token %}
+                                    {% for hidden_field in form.hidden_fields %}
+                                        {{ hidden_field }}
+                                    {% endfor %}
+        
+                                    {% if form.non_field_errors %}
+                                        <div class="alert alert-danger" role="alert" id="alert">
+                                            {% for error in form.non_field_errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+        
+                                    {% for field in form.visible_fields %}
+                                        <div class="form-group col-md-6 ">
+                                            {{ field.label_tag }}
+        
+                                            {% if form.is_bound %}
+                                                {% if field.errors %}
+                                                    {% render_field field class="form-control is-invalid" %}
+                                                    {% for error in field.errors %}
+                                                        <div class="invalid-feedback">
+                                                            {{ error }}
+                                                        </div>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    {% render_field field class="form-control is-valid" %}
+                                                {% endif %}
+                                            {% else %}
+                                                {% render_field field class="form-control" %}
+                                            {% endif %}
+        
+                                            {% if field.help_text %}
+                                            <small class="form-text text-muted">{{ field.help_text }}</small>
+                                            {% endif %}
+                                        </div>
+                                    {% endfor %}
+                                    <!-- <p><button type="submit" class="cart-btn mt-3 mb-3">Initialize Payment</button></p> -->
+                                    <p><input type="submit" value="Initialize Payment" class="mb-3 mt-3"></p>
+                                </form>   
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </section>
+
+        <script>
+            // suppose the `id` attribute of element is `message_container`.
+            var message_ele = document.getElementById("alert");
+    
+            setTimeout(function(){ 
+            message_ele.style.display = "none"; 
+            }, 3000);
+            // Timeout is 3 sec, you can change it
+        </script>
+
+
+
+    </body>
+{% endblock %}

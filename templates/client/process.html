@@ -1,0 +1,113 @@
+{% extends 'client/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+
+    {% block title%}
+        Payment Processing
+    {% endblock %}
+
+{% block content %}
+    <body>
+                
+        <!--PreLoader-->
+        <div class="loader">
+            <div class="loader-inner">
+                <div class="circle"></div>
+            </div>
+        </div>
+        <!--PreLoader Ends-->
+        
+        
+        <!-- breadcrumb-section -->
+        <div class="breadcrumb-section breadcrumb-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2 text-center">
+                        <div class="breadcrumb-text">
+                            <p>Payment</p>
+                            <h1>...Processing...</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end breadcrumb section -->
+
+        <div class="container mt-3">
+            {% comment %} <h1>Payment for  {{ payment.product_name }}</h1> {% endcomment %}
+            <ul class="object-tools">
+                <li>
+                    <a href="#" onclick="window.print();">
+                        Print Invoice
+                    </a>
+                </li>
+            </ul>
+            <table class="table table-striped mt-2">
+                <tr>
+                    <th>Created</th>
+                    <td>{{ payment.created }}</td>
+                </tr>
+                <tr>
+                    <th>Customer</th>
+                    <td>{{ payment.name }}</td>
+                </tr>
+                <tr>
+                    <th>E-mail</th>
+                    <td><a href="mailto:{{ payment.email }}">{{ payment.email }}</a></td>
+                </tr>
+                <tr>
+                    <th>Delivery Address</th>
+                    <td>
+                        {{ payment.address }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Phone Number</th>
+                    <td>
+                        {{ payment.phone }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Product</th>
+                    <td>
+                        {{ payment.product_name }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Quantity</th>
+                    <td>
+                        {{ payment.get_quantity }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Unit Price</th>
+                    <td>
+                        {{ payment.amount }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Total amount</th>
+                    <td><i>&#x20A6;</i> {{ payment.get_amount }}</td>
+                </tr>
+                <tr>
+                    <th>Status</th>
+                    <td>{% if payment.paid %}Paid{% else %}Pending payment{% endif %}</td>
+                </tr>
+                <tr>
+                    <th>Paystack payment</th>
+                    <td>
+                        {% if payment.paystack_ref %}
+                            ##################
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+            <form action="{% url 'commerce:process' %}" method="post">
+                <input type="submit" class="btn oneMusic-btn mb-3" value="Pay now">
+                {% csrf_token %}
+            </form>
+        </div>
+    </body>
+{% endblock %}
